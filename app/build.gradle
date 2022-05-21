@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.farazzz.facerecognition"
+        applicationId "com.farazzz.visitease"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 4

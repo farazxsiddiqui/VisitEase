@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.farazzz.facerecognition">
+    package="com.farazzz.visitease">
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/face_icon2"
+        android:icon="@drawable/visiteaselogo"
         android:label="VisitEase"
         android:largeHeap="true"
-        android:roundIcon="@drawable/face_icon2"
+        android:roundIcon="@drawable/visiteaselogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FaceRecognition.NoActionBar">
-        <activity android:name="com.farazzz.facerecognition.MainActivity"></activity>
+        <activity android:name="com.farazzz.visitease.MainActivity"></activity>
         <activity
-            android:name="com.farazzz.facerecognition.splash_screen"
+            android:name="com.farazzz.visitease.splash_screen"
             android:label="VisitEase"
             android:theme="@style/Theme.FaceRecognition.NoActionBar"
             android:exported="true">

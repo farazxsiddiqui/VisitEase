@@ -1,4 +1,4 @@
-package com.farazzz.facerecognition;
+package com.farazzz.visitease;
 
 import org.junit.Test;
 
