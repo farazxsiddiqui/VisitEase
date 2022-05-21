@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.atharvakale.facerecognition"
+        applicationId "com.farazzz.facerecognition"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 4
