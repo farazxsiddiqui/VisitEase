@@ -37,6 +37,7 @@
             android:background="@drawable/cam"
             android:backgroundTint="@color/teal_200"
             android:elevation="1dp"
+            android:rotationY="30"
             tools:layout_conversion_absoluteHeight="63dp"
             tools:layout_conversion_absoluteWidth="62dp" />
 

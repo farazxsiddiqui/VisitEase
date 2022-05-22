@@ -9,12 +9,12 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/visiteaselogo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FaceRecognition.NoActionBar">
+        android:theme="@style/theme.VisitEase.NoActionBar">
         <activity android:name="com.farazzz.visitease.MainActivity"></activity>
         <activity
             android:name="com.farazzz.visitease.splash_screen"
             android:label="VisitEase"
-            android:theme="@style/Theme.FaceRecognition.NoActionBar"
+            android:theme="@style/theme.VisitEase.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

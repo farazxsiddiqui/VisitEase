@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,10 +108,11 @@ public class MainActivity extends AppCompatActivity {
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     //saved Faces using a HashMap
     private HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>();
-    //private final Map<Integer,DetailsVisit> details = new HashMap<Integer,DetailsVisit>();
+    private HashMap<String,String> details = new HashMap<>();
 
     //*Button bTakePicture, bRecording;
 
+    TextView tDes,tCom;
 
     private static Bitmap getCropBitmapByCPU(Bitmap source, RectF cropRectF) {
         Bitmap resultBitmap = Bitmap.createBitmap((int) cropRectF.width(),
@@ -243,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = getSharedPreferences("Distance", Context.MODE_PRIVATE);
         distance = sharedPref.getFloat("distance", 1.00f);
+
 
         face_preview.setVisibility(View.INVISIBLE);
         recognize = findViewById(R.id.button3);
@@ -473,15 +476,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setItems(names, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                switch (which) {
-                    case 0:
-                        //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-                        checkdetails();
-                        break;
-
-                }
-
+                //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+                checkdetails();
             }
 
         });
@@ -547,24 +543,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void visitorDetailEdit() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
+        //Setting up multiple input
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter details:");
 
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        // Set up the input
-        final EditText input = new EditText(context);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
+
+        tDes = new TextView(this);
+        tDes.setText("Destination");
+        tDes.setTextSize(18);
+        linearLayout.addView(tDes);
+
+        tCom = new TextView(this);
+        tCom.setText("Comments");
+        tCom.setTextSize(18);
+        linearLayout.addView(tCom);
+
+        final EditText input = new EditText(this);
+        input.setHint("Edit Destination");
+        final EditText input1 = new EditText(this);
+        input1.setHint("Edit Comments");
+        linearLayout.addView(input);
+        linearLayout.addView(input1);
+        builder.setView(linearLayout);
+
 
 
         // Set up the buttons
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int id = which;
-                String name = "", destination = "", comments = "";
-                DetailsVisit Visitor = new DetailsVisit(id, name, destination, comments);
+
+
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
