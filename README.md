@@ -1,6 +1,5 @@
 # VisitEase
-
-## This an android application that helps you recognize visitors/members and keep a track of their activity.
+This an android application that helps you recognize visitors/members and keep a track of their activity.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine.
