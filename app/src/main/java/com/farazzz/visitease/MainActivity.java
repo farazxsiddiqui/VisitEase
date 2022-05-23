@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -105,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
     int OUTPUT_SIZE = 192; //Output size of model
     ProcessCameraProvider cameraProvider;
     String modelFile = "mobile_face_net.tflite"; //model name
+    TextView tDes, tCom;
+    DatabaseHandler handler = new DatabaseHandler(MainActivity.this);
+
+
+    //*Button bTakePicture, bRecording;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     //saved Faces using a HashMap
     private HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>();
-    private HashMap<String,String> details = new HashMap<>();
-
-    //*Button bTakePicture, bRecording;
-
-    TextView tDes,tCom;
 
     private static Bitmap getCropBitmapByCPU(Bitmap source, RectF cropRectF) {
         Bitmap resultBitmap = Bitmap.createBitmap((int) cropRectF.width(),
@@ -252,6 +253,13 @@ public class MainActivity extends AppCompatActivity {
         camera_switch = findViewById(R.id.button5);
         actions = findViewById(R.id.button2);
 
+
+
+
+
+
+
+
         /*bTakePicture = findViewById(R.id.bCapture);
         bRecording = findViewById(R.id.bRecord);*/
 
@@ -275,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setTitle("Select Action:");
 
                 //adds a checkbox list
-                //declaring an array of strings that containt the action's title
+                //declaring an array of strings that contains the action's options
                 String[] names = {"View Visitors List", "Update Visitors List", "Save Data", "Reload Data", "Clear Data", "Import Photo", "Change Language"};
 
                 //building an interface that displays options
@@ -411,7 +419,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void addFace() {
         {
             start = false;
@@ -498,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkdetails() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select choice:");
-        String[] names = {"View details", "Update details"};
+        String[] names = {"View details", "Update details","Delete details"};
 
         builder.setItems(names, new DialogInterface.OnClickListener() {
             @Override
@@ -510,6 +517,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 1:
                         visitorDetailEdit();
+                        break;
+                    case 2:
+                        visitorDetailDelete();
                         break;
                 }
 
@@ -527,9 +537,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void visitorDetailView() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Visitor details:");
+        Cursor res = handler.getVisitor();
+        if(res.getCount()==0)
+        {
+            Toast.makeText(MainActivity.this,"No data",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while(res.moveToNext())
+        {
+            buffer.append("Name: "+res.getString(0)+"\n");
+            buffer.append("Destination: "+res.getString(1)+"\n");
+            buffer.append("Comments: "+res.getString(2)+"\n\n");
+        }
+        builder.setMessage(buffer.toString());
+
+
+
+//        tDes = new TextView(this);
+//        tDes.setText("Destination");
+//        tDes.setTextSize(18);
+//        linearLayout.addView(tDes);
+//
+//        tCom = new TextView(this);
+//        tCom.setText("comments");
+//        tCom.setTextSize(18);
+//        linearLayout.addView(tCom);
+
+
 
 
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -542,6 +581,7 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+
     public void visitorDetailEdit() {
         //Setting up multiple input
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -550,36 +590,41 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-
-        tDes = new TextView(this);
-        tDes.setText("Destination");
-        tDes.setTextSize(18);
-        linearLayout.addView(tDes);
-
-        tCom = new TextView(this);
-        tCom.setText("Comments");
-        tCom.setTextSize(18);
-        linearLayout.addView(tCom);
-
-        final EditText input = new EditText(this);
-        input.setHint("Edit Destination");
         final EditText input1 = new EditText(this);
-        input1.setHint("Edit Comments");
-        linearLayout.addView(input);
-        linearLayout.addView(input1);
-        builder.setView(linearLayout);
+        input1.setHint("Confirm Name");
+        final EditText input2 = new EditText(this);
+        input2.setHint("Edit Destination");
+        final EditText input3 = new EditText(this);
+        input3.setHint("Edit Comments");
 
+
+        linearLayout.addView(input1);
+        linearLayout.addView(input2);
+        linearLayout.addView(input3);
+
+        builder.setView(linearLayout);
 
 
         // Set up the buttons
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String name = input1.getText().toString();
+                String destination = input2.getText().toString();
+                String comments = input3.getText().toString();
+                boolean checkEntry = handler.addVisitor(name, destination, comments);
+                if(checkEntry==true)
+                {
+                    Toast.makeText(MainActivity.this, "Visitor's data added", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
 
-
-
+                    Toast.makeText(MainActivity.this, "Enter valid name.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -588,6 +633,50 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    private void visitorDetailDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter details:");
+
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText input1 = new EditText(this);
+        input1.setHint("Confirm Name");
+
+        linearLayout.addView(input1);
+
+        builder.setView(linearLayout);
+
+        // Set up the buttons
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = input1.getText().toString();
+
+                boolean checkDeletion = handler.deleteVisitor(name);
+                if(checkDeletion==true)
+                {
+                    Toast.makeText(MainActivity.this, "Visitor's data deleted", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+
+                    Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
     }
 
     private void updateData() {
