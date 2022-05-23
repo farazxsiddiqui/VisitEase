@@ -1,8 +1,8 @@
-#VisitEase
+# VisitEase
 
-##This an android application that helps you recognize visitors/members and keep a track of their activity.
+## This an android application that helps you recognize visitors/members and keep a track of their activity.
 
-##Getting Started
+## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine.
 
@@ -22,7 +22,7 @@ git clone https://github.com/farazxsiddiqui/VisitEase.git
 First enable these permissions manually from the app info in device settings if not prompted.
 * Camera
 
-##Tech Stacks/Libraries/APIs used:
+## Tech Stacks/Libraries/APIs used:
 * Java
 * Tensorflow Lite
 * SQLite
