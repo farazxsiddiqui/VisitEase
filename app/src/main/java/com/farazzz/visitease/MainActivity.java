@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     int OUTPUT_SIZE = 192; //Output size of model
     ProcessCameraProvider cameraProvider;
     String modelFile = "mobile_face_net.tflite"; //model name
-    TextView tDes, tCom;
+
     DatabaseHandler handler = new DatabaseHandler(MainActivity.this);
 
 
@@ -254,26 +254,10 @@ public class MainActivity extends AppCompatActivity {
         actions = findViewById(R.id.button2);
 
 
-
-
-
-
-
-
-        /*bTakePicture = findViewById(R.id.bCapture);
-        bRecording = findViewById(R.id.bRecord);*/
-
         //Camera Permission
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
         }
-
-        /*bTakePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
 
         //On-screen Action Button
         actions.setOnClickListener(new View.OnClickListener() {
@@ -284,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //adds a checkbox list
                 //declaring an array of strings that contains the action's options
-                String[] names = {"View Visitors List", "Update Visitors List", "Save Data", "Reload Data", "Clear Data", "Import Photo", "Change Language"};
+                String[] names = {"View Visitors List", "Update Visitors List", "Save Data", "Reload Data", "Clear Data", "Import Photo", "View Entries"};
 
                 //building an interface that displays options
                 builder.setItems(names, new DialogInterface.OnClickListener() {
@@ -311,9 +295,8 @@ public class MainActivity extends AppCompatActivity {
                                 loadPhoto();
                                 break;
                             case 6:
-                                changeLanguage();
+                                checkdetails();
                                 break;
-
                         }
 
                     }
@@ -391,33 +374,6 @@ public class MainActivity extends AppCompatActivity {
         cameraBind();
     }
 
-    private void changeLanguage() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Select Language:");
-        String[] languages = {"English", "Hindi", "Urdu"};
-        builder.setItems(languages, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                switch (which) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                }
-
-            }
-        });
-        builder.setNegativeButton("Cancel", null);
-
-        // create and show the alert dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-
-    }
 
     private void addFace() {
         {
@@ -433,18 +389,25 @@ public class MainActivity extends AppCompatActivity {
 
             // Set up the buttons
             builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //Toast.makeText(context, input.getText().toString(), Toast.LENGTH_SHORT).show();
+                    //Checking if user already exits
+                    if (registered.containsKey(input.getText().toString().trim())) {
+                        Toast.makeText(context, "Visitor already exists.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Toast.makeText(context, input.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                    //Create and Initialize new object with Face embeddings and Name.
-                    SimilarityClassifier.Recognition result = new SimilarityClassifier
-                            .Recognition("0", "", -1f);
-                    result.setExtra(embedding);
+                        //Create and Initialize new object with Face embeddings and Name.
+                        SimilarityClassifier.Recognition result = new SimilarityClassifier
+                                .Recognition("0", "", -1f);
+                        result.setExtra(embedding);
 
-                    registered.put(input.getText().toString(), result);
-                    start = true;
 
+                        registered.put(input.getText().toString().trim(), result);
+                        Toast.makeText(context, "Visitor added.", Toast.LENGTH_SHORT).show();
+                        start = true;
+                    }
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -475,7 +438,6 @@ public class MainActivity extends AppCompatActivity {
             names[i] = entry.getKey();
             checkedItems[i] = false;
             i = i + 1;
-
         }
         //displaying names
         //builder.setItems(names,null);
@@ -484,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-                checkdetails();
+                //checkdetails();
             }
 
         });
@@ -505,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkdetails() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select choice:");
-        String[] names = {"View details", "Update details","Delete details"};
+        String[] names = {"View Entries", "Update Entry", "Delete Entry"};
 
         builder.setItems(names, new DialogInterface.OnClickListener() {
             @Override
@@ -537,40 +499,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void visitorDetailView() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Visitor details:");
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
         Cursor res = handler.getVisitor();
-        if(res.getCount()==0)
-        {
-            Toast.makeText(MainActivity.this,"No data",Toast.LENGTH_SHORT).show();
+        if (res.getCount() == 0) {
+            Toast.makeText(MainActivity.this, "No Entry found!", Toast.LENGTH_SHORT).show();
             return;
         }
-        StringBuffer buffer = new StringBuffer();
-        while(res.moveToNext())
-        {
-            buffer.append("Name: "+res.getString(0)+"\n");
-            buffer.append("Destination: "+res.getString(1)+"\n");
-            buffer.append("Comments: "+res.getString(2)+"\n\n");
+        StringBuilder sb = new StringBuilder();
+        while (res.moveToNext()) {
+            sb.append("Name: " + res.getString(0) + "\n");
+            sb.append("Destination: " + res.getString(1) + "\n");
+            sb.append("Comments: " + res.getString(2) + "\n\n");
         }
-        builder.setMessage(buffer.toString());
-
-
-
-//        tDes = new TextView(this);
-//        tDes.setText("Destination");
-//        tDes.setTextSize(18);
-//        linearLayout.addView(tDes);
-//
-//        tCom = new TextView(this);
-//        tCom.setText("comments");
-//        tCom.setTextSize(18);
-//        linearLayout.addView(tCom);
-
-
-
-
+        builder.setMessage(sb.toString());
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -591,11 +536,11 @@ public class MainActivity extends AppCompatActivity {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText input1 = new EditText(this);
-        input1.setHint("Confirm Name");
+        input1.setHint("Confirm Name:");
         final EditText input2 = new EditText(this);
-        input2.setHint("Edit Destination");
+        input2.setHint("Edit Destination:");
         final EditText input3 = new EditText(this);
-        input3.setHint("Edit Comments");
+        input3.setHint("Edit Comments:");
 
 
         linearLayout.addView(input1);
@@ -609,18 +554,19 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String name = input1.getText().toString();
-                String destination = input2.getText().toString();
-                String comments = input3.getText().toString();
+                String name = input1.getText().toString().trim();
+                String destination = input2.getText().toString().trim();
+                String comments = input3.getText().toString().trim();
                 boolean checkEntry = handler.addVisitor(name, destination, comments);
-                if(checkEntry==true)
-                {
-                    Toast.makeText(MainActivity.this, "Visitor's data added", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-
-                    Toast.makeText(MainActivity.this, "Enter valid name.", Toast.LENGTH_SHORT).show();
+                if (checkEntry == true) {
+                    Toast.makeText(MainActivity.this, "Entry added!", Toast.LENGTH_SHORT).show();
+                } else {
+                    checkEntry = handler.updateVisitor(name, destination, comments);
+                    if (checkEntry == true) {
+                        Toast.makeText(MainActivity.this, "Entry updated!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -637,13 +583,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void visitorDetailDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter details:");
+        builder.setTitle("Confirm Name:");
 
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText input1 = new EditText(this);
-        input1.setHint("Confirm Name");
 
         linearLayout.addView(input1);
 
@@ -653,17 +598,14 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String name = input1.getText().toString();
+                String name = input1.getText().toString().trim();
 
                 boolean checkDeletion = handler.deleteVisitor(name);
-                if(checkDeletion==true)
-                {
-                    Toast.makeText(MainActivity.this, "Visitor's data deleted", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                if (checkDeletion == true) {
+                    Toast.makeText(MainActivity.this, "Entry deleted!", Toast.LENGTH_SHORT).show();
+                } else {
 
-                    Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -719,6 +661,9 @@ public class MainActivity extends AppCompatActivity {
                         if (checkedItems[i]) {
 //                                Toast.makeText(MainActivity.this, names[i], Toast.LENGTH_SHORT).show();
                             registered.remove(names[i]);
+
+                            //Deleting entry from table
+                            handler.deleteVisitor(names[i]);
                         }
 
                     }
