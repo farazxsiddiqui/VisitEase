@@ -70,4 +70,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM VisitorTable", null);
         return cursor;
     }
+    public Cursor getVisitor(String name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM VisitorTable WHERE NAME=?", new String[]{name});
+        return cursor;
+    }
+    void clearTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM VisitorTable");
+
+    }
 }

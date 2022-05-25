@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.farazzz.visitease">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/visiteaselogo"
@@ -9,21 +11,30 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/visiteaselogo"
         android:supportsRtl="true"
-        android:theme="@style/theme.VisitEase.NoActionBar">
-        <activity android:name="com.farazzz.visitease.MainActivity"></activity>
+        android:theme="@style/theme.VisitEase">
         <activity
-            android:name="com.farazzz.visitease.splash_screen"
+            android:name=".ViewEntryActivity"
+            android:label="Entries"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".EntriesActivity"
+            android:exported="false"
+            android:label="Modify Entries"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".splash_screen"
+            android:exported="true"
             android:label="VisitEase"
-            android:theme="@style/theme.VisitEase.NoActionBar"
-            android:exported="true">
+            android:theme="@style/theme.VisitEase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

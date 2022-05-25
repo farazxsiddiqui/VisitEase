@@ -53,6 +53,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -89,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView face_preview;
     Interpreter tfLite;
     TextView reco_name, preview_info, textAbove_preview;
-    Button recognize, camera_switch, actions;
+    Button recognize, camera_switch;
+    FloatingActionButton optionsButton;
     ImageButton add_face;
     CameraSelector cameraSelector;
     float distance = 1.0f;
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     //*Button bTakePicture, bRecording;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     //saved Faces using a HashMap
-    private HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>();
+    public static HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>();
 
     private static Bitmap getCropBitmapByCPU(Bitmap source, RectF cropRectF) {
         Bitmap resultBitmap = Bitmap.createBitmap((int) cropRectF.width(),
@@ -241,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
         reco_name = findViewById(R.id.textView);
         preview_info = findViewById(R.id.textView2);
         textAbove_preview = findViewById(R.id.textAbovePreview);
+        textAbove_preview.setText("Recognized Visitor: ");
         add_face = findViewById(R.id.imageButton);
         add_face.setVisibility(View.INVISIBLE);
 
@@ -251,7 +254,9 @@ public class MainActivity extends AppCompatActivity {
         face_preview.setVisibility(View.INVISIBLE);
         recognize = findViewById(R.id.button3);
         camera_switch = findViewById(R.id.button5);
-        actions = findViewById(R.id.button2);
+
+        optionsButton = findViewById(R.id.optionsButton);
+
 
 
         //Camera Permission
@@ -259,8 +264,9 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
         }
 
+
         //On-screen Action Button
-        actions.setOnClickListener(new View.OnClickListener() {
+        optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -268,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //adds a checkbox list
                 //declaring an array of strings that contains the action's options
-                String[] names = {"View Visitors List", "Update Visitors List", "Save Data", "Reload Data", "Clear Data", "Import Photo", "View Entries"};
+                String[] names = {"View Visitors List", "Update Visitors List", "Save Data", "Clear Data", "Import Photo", "View Entries","Modify Entries"};
 
                 //building an interface that displays options
                 builder.setItems(names, new DialogInterface.OnClickListener() {
@@ -284,18 +290,21 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 insertToSP(registered, 0); //mode: 0:save all, 1:clear all, 2:update all
-                                break;
-                            case 3:
                                 registered.putAll(readFromSP());
                                 break;
-                            case 4:
+                            case 3:
                                 clearData();
                                 break;
-                            case 5:
+                            case 4:
                                 loadPhoto();
                                 break;
+                            case 5:
+                                Intent intent = new Intent(MainActivity.this,ViewEntryActivity.class);
+                                startActivity(intent);
+                                break;
                             case 6:
-                                checkdetails();
+                                Intent intent2 = new Intent(MainActivity.this,EntriesActivity.class);
+                                startActivity(intent2);
                                 break;
                         }
 
@@ -464,6 +473,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    // DELETE
     private void checkdetails() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Select choice:");
@@ -527,6 +537,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //DELETE
     public void visitorDetailEdit() {
         //Setting up multiple input
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -557,15 +568,20 @@ public class MainActivity extends AppCompatActivity {
                 String name = input1.getText().toString().trim();
                 String destination = input2.getText().toString().trim();
                 String comments = input3.getText().toString().trim();
-                boolean checkEntry = handler.addVisitor(name, destination, comments);
-                if (checkEntry == true) {
-                    Toast.makeText(MainActivity.this, "Entry added!", Toast.LENGTH_SHORT).show();
-                } else {
-                    checkEntry = handler.updateVisitor(name, destination, comments);
+                if (!registered.containsKey(input1.getText().toString().trim())) {
+                    Toast.makeText(context, "Visitor does not exists!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    boolean checkEntry = handler.addVisitor(name, destination, comments);
                     if (checkEntry == true) {
-                        Toast.makeText(MainActivity.this, "Entry updated!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Entry added!", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        checkEntry = handler.updateVisitor(name, destination, comments);
+                        if (checkEntry == true) {
+                            Toast.makeText(MainActivity.this, "Entry updated!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -581,6 +597,7 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    //DELETE
     private void visitorDetailDelete() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm Name:");
@@ -686,6 +703,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Delete All", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //Deleting the data from table
+                handler.clearTable();
                 registered.clear();
                 Toast.makeText(context, "Data Cleared", Toast.LENGTH_SHORT).show();
             }
@@ -815,7 +834,7 @@ public class MainActivity extends AppCompatActivity {
 
                                                 } else {
                                                     if (registered.isEmpty())
-                                                        reco_name.setText("Add Visitor");
+                                                        reco_name.setText("Add Visitor!");
                                                     else
                                                         reco_name.setText("No Face Detected!");
                                                 }
