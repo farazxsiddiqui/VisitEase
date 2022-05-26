@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (recognize.getText().toString().equals("Recognize")) {
                     start = true;
-                    textAbove_preview.setText("Recognized Visitor:");
+                    textAbove_preview.setText("");
                     recognize.setText("Add Visitor");
                     add_face.setVisibility(View.INVISIBLE);
                     reco_name.setVisibility(View.VISIBLE);
@@ -415,6 +415,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //For stopping text to speech
     @Override
     protected void onDestroy() {
         if(textSpeech!=null)
@@ -430,7 +431,7 @@ public class MainActivity extends AppCompatActivity {
     private void addFace() {
         {
             start = false;
-            //creating title of the alert box
+            //Creating title of the alert box
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Enter Name:");
 
@@ -498,7 +499,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
-                //checkdetails();
                 Intent intent = new Intent(MainActivity.this, ViewIndividualDetailActivity.class);
                 startActivity(intent);
             }
@@ -1138,7 +1138,7 @@ public class MainActivity extends AppCompatActivity {
                                 add_face.setVisibility(View.VISIBLE);
                                 reco_name.setVisibility(View.INVISIBLE);
                                 face_preview.setVisibility(View.VISIBLE);
-                                preview_info.setText("1.Bring Face in view of Camera.\n\n2.Your Face preview will appear here.\n\n3.Click Add button to save face.");
+                                preview_info.setText("\n1.Make sure that the face is visible to the camera.\n\n2.The face preview will appear here.\n\n3.Click on the Add button to save the face.");
                                 Face face = faces.get(0);
 //                                System.out.println(face);
 
