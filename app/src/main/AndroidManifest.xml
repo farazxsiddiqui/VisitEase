@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/theme.VisitEase">
         <activity
+            android:name=".ViewIndividualDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewEntryActivity"
-            android:label="Entries"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:label="Entries"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".EntriesActivity"
             android:exported="false"

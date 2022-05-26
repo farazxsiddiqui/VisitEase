@@ -456,6 +456,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
                 //checkdetails();
+                Intent intent = new Intent(MainActivity.this, ViewIndividualDetailActivity.class);
+                startActivity(intent);
             }
 
         });
