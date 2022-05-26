@@ -7,20 +7,6 @@
     tools:context=".EntriesActivity">
 
     <EditText
-        android:id="@+id/nameText"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:hint="Name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/destinationText"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -28,10 +14,9 @@
         android:ems="10"
         android:hint="Destination"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/nameText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/nameText"
-        app:layout_constraintTop_toBottomOf="@+id/nameText" />
+        app:layout_constraintEnd_toEndOf="@+id/autoNameI"
+        app:layout_constraintStart_toStartOf="@+id/autoNameI"
+        app:layout_constraintTop_toBottomOf="@+id/autoNameI" />
 
     <EditText
         android:id="@+id/commentsText"
@@ -53,8 +38,6 @@
         android:layout_marginBottom="222dp"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/nameText"
-        app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/commentsText"
         app:layout_constraintVertical_bias="1.0" />
@@ -69,9 +52,20 @@
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.964"
-        app:layout_constraintStart_toStartOf="@+id/nameText"
         app:layout_constraintTop_toBottomOf="@+id/commentsText"
         app:layout_constraintVertical_bias="1.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoNameI"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="56dp"
+        android:completionThreshold="1"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

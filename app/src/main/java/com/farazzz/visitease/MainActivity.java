@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.speech.tts.TextToSpeech;
 import android.text.InputType;
 import android.util.Pair;
 import android.util.Size;
@@ -77,6 +78,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -85,6 +87,7 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int SELECT_PICTURE = 1;
+    TextToSpeech textSpeech;
     FaceDetector detector;
     PreviewView previewView;
     ImageView face_preview;
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     TextView reco_name, preview_info, textAbove_preview;
     Button recognize, camera_switch;
     FloatingActionButton optionsButton;
-    ImageButton add_face;
+    ImageButton add_face, speakName;
     CameraSelector cameraSelector;
     float distance = 1.0f;
     boolean start = true, flipX = false;
@@ -233,6 +236,8 @@ public class MainActivity extends AppCompatActivity {
         return nv21;
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,8 +247,9 @@ public class MainActivity extends AppCompatActivity {
         face_preview = findViewById(R.id.imageView);
         reco_name = findViewById(R.id.textView);
         preview_info = findViewById(R.id.textView2);
+        speakName = findViewById(R.id.speakButton);
         textAbove_preview = findViewById(R.id.textAbovePreview);
-        textAbove_preview.setText("Recognized Visitor: ");
+        //textAbove_preview.setText("Recognized Visitor: ");
         add_face = findViewById(R.id.imageButton);
         add_face.setVisibility(View.INVISIBLE);
 
@@ -256,6 +262,24 @@ public class MainActivity extends AppCompatActivity {
         camera_switch = findViewById(R.id.button5);
 
         optionsButton = findViewById(R.id.optionsButton);
+
+        textSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i==TextToSpeech.SUCCESS) {
+                   int speechResult = textSpeech.setLanguage(Locale.ENGLISH);
+                   if(speechResult==TextToSpeech.LANG_MISSING_DATA
+                   || speechResult==TextToSpeech.LANG_NOT_SUPPORTED) {
+                       Toast.makeText(context, "Language not supported!", Toast.LENGTH_SHORT).show();
+                   }
+                }
+
+            }
+        });
+
+        //textSpeech.speak(name,TextToSpeech.QUEUE_FLUSH,null);
+
+
 
 
 
@@ -361,7 +385,7 @@ public class MainActivity extends AppCompatActivity {
                     add_face.setVisibility(View.VISIBLE);
                     reco_name.setVisibility(View.INVISIBLE);
                     face_preview.setVisibility(View.VISIBLE);
-                    preview_info.setText("1.Make sure that the face is visible to the camera.\n\n2.The face preview will appear here.\n\n3.Click on the Add button to save the face.");
+                    preview_info.setText("\n1.Make sure that the face is visible to the camera.\n\n2.The face preview will appear here.\n\n3.Click on the Add button to save the face.");
                 }
 
             }
@@ -381,7 +405,26 @@ public class MainActivity extends AppCompatActivity {
         detector = FaceDetection.getClient(highAccuracyOpts);
 
         cameraBind();
+
+        speakName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = reco_name.getText().toString().trim();
+                textSpeech.speak(name,TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
     }
+
+    @Override
+    protected void onDestroy() {
+        if(textSpeech!=null)
+        {
+            textSpeech.stop();
+            textSpeech.shutdown();
+        }
+        super.onDestroy();
+    }
+
 
 
     private void addFace() {
@@ -476,169 +519,170 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // DELETE
-    private void checkdetails() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Select choice:");
-        String[] names = {"View Entries", "Update Entry", "Delete Entry"};
-
-        builder.setItems(names, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                switch (which) {
-                    case 0:
-                        visitorDetailView();
-                        break;
-                    case 1:
-                        visitorDetailEdit();
-                        break;
-                    case 2:
-                        visitorDetailDelete();
-                        break;
-                }
-
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
-
-    private void visitorDetailView() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Visitor details:");
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        Cursor res = handler.getVisitor();
-        if (res.getCount() == 0) {
-            Toast.makeText(MainActivity.this, "No Entry found!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        while (res.moveToNext()) {
-            sb.append("Name: " + res.getString(0) + "\n");
-            sb.append("Destination: " + res.getString(1) + "\n");
-            sb.append("Comments: " + res.getString(2) + "\n\n");
-        }
-        builder.setMessage(sb.toString());
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
+//    private void checkdetails() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setTitle("Select choice:");
+//        String[] names = {"View Entries", "Update Entry", "Delete Entry"};
+//
+//        builder.setItems(names, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                switch (which) {
+//                    case 0:
+//                        visitorDetailView();
+//                        break;
+//                    case 1:
+//                        visitorDetailEdit();
+//                        break;
+//                    case 2:
+//                        visitorDetailDelete();
+//                        break;
+//                }
+//
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//    }
 
 
     //DELETE
-    public void visitorDetailEdit() {
-        //Setting up multiple input
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter details:");
+//    private void visitorDetailView() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//        builder.setTitle("Visitor details:");
+//        LinearLayout linearLayout = new LinearLayout(this);
+//        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//        Cursor res = handler.getVisitor();
+//        if (res.getCount() == 0) {
+//            Toast.makeText(MainActivity.this, "No Entry found!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        StringBuilder sb = new StringBuilder();
+//        while (res.moveToNext()) {
+//            sb.append("Name: " + res.getString(0) + "\n");
+//            sb.append("Destination: " + res.getString(1) + "\n");
+//            sb.append("Comments: " + res.getString(2) + "\n\n");
+//        }
+//        builder.setMessage(sb.toString());
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//    }
 
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-        final EditText input1 = new EditText(this);
-        input1.setHint("Confirm Name:");
-        final EditText input2 = new EditText(this);
-        input2.setHint("Edit Destination:");
-        final EditText input3 = new EditText(this);
-        input3.setHint("Edit Comments:");
-
-
-        linearLayout.addView(input1);
-        linearLayout.addView(input2);
-        linearLayout.addView(input3);
-
-        builder.setView(linearLayout);
-
-
-        // Set up the buttons
-        builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String name = input1.getText().toString().trim();
-                String destination = input2.getText().toString().trim();
-                String comments = input3.getText().toString().trim();
-                if (!registered.containsKey(input1.getText().toString().trim())) {
-                    Toast.makeText(context, "Visitor does not exists!", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    boolean checkEntry = handler.addVisitor(name, destination, comments);
-                    if (checkEntry == true) {
-                        Toast.makeText(MainActivity.this, "Entry added!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        checkEntry = handler.updateVisitor(name, destination, comments);
-                        if (checkEntry == true) {
-                            Toast.makeText(MainActivity.this, "Entry updated!", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
 
     //DELETE
-    private void visitorDetailDelete() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm Name:");
+//    public void visitorDetailEdit() {
+//        //Setting up multiple input
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Enter details:");
+//
+//        LinearLayout linearLayout = new LinearLayout(this);
+//        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//
+//        final EditText input1 = new EditText(this);
+//        input1.setHint("Confirm Name:");
+//        final EditText input2 = new EditText(this);
+//        input2.setHint("Edit Destination:");
+//        final EditText input3 = new EditText(this);
+//        input3.setHint("Edit Comments:");
+//
+//
+//        linearLayout.addView(input1);
+//        linearLayout.addView(input2);
+//        linearLayout.addView(input3);
+//
+//        builder.setView(linearLayout);
+//
+//
+//        // Set up the buttons
+//        builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String name = input1.getText().toString().trim();
+//                String destination = input2.getText().toString().trim();
+//                String comments = input3.getText().toString().trim();
+//                if (!registered.containsKey(input1.getText().toString().trim())) {
+//                    Toast.makeText(context, "Visitor does not exists!", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    boolean checkEntry = handler.addVisitor(name, destination, comments);
+//                    if (checkEntry == true) {
+//                        Toast.makeText(MainActivity.this, "Entry added!", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        checkEntry = handler.updateVisitor(name, destination, comments);
+//                        if (checkEntry == true) {
+//                            Toast.makeText(MainActivity.this, "Entry updated!", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//    }
 
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-
-        final EditText input1 = new EditText(this);
-
-        linearLayout.addView(input1);
-
-        builder.setView(linearLayout);
-
-        // Set up the buttons
-        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String name = input1.getText().toString().trim();
-
-                boolean checkDeletion = handler.deleteVisitor(name);
-                if (checkDeletion == true) {
-                    Toast.makeText(MainActivity.this, "Entry deleted!", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-
-    }
+    //DELETE
+//    private void visitorDetailDelete() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Confirm Name:");
+//
+//        LinearLayout linearLayout = new LinearLayout(this);
+//        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//
+//        final EditText input1 = new EditText(this);
+//
+//        linearLayout.addView(input1);
+//
+//        builder.setView(linearLayout);
+//
+//        // Set up the buttons
+//        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String name = input1.getText().toString().trim();
+//
+//                boolean checkDeletion = handler.deleteVisitor(name);
+//                if (checkDeletion == true) {
+//                    Toast.makeText(MainActivity.this, "Entry deleted!", Toast.LENGTH_SHORT).show();
+//                } else {
+//
+//                    Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//
+//    }
 
     private void updateData() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -931,7 +975,10 @@ public class MainActivity extends AppCompatActivity {
                 // label = name;
                 distance_local = nearest.get(0).second;
                 if (distance_local < distance) //If distance between Closest found face is more than 1.000 ,then output UNKNOWN face.
+                {
                     reco_name.setText(name);
+                }
+
                 else
                     reco_name.setText("Unknown");
 //                    System.out.println("nearest: " + name + " - distance: " + distance_local);
@@ -1151,18 +1198,6 @@ public class MainActivity extends AppCompatActivity {
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
         return image;
-    }
-
-    class DetailsVisit {
-        int id;
-        String name, destination, comments;
-
-        public DetailsVisit(int id, String name, String destination, String comments) {
-            this.id = id;
-            this.name = name;
-            this.destination = destination;
-            this.comments = comments;
-        }
     }
 
 }

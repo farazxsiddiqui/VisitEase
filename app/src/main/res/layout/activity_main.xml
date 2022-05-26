@@ -42,17 +42,18 @@
         android:id="@+id/imageButton"
         android:layout_width="52dp"
         android:layout_height="50dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginBottom="168dp"
+        android:layout_marginStart="56dp"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.428"
         app:srcCompat="@drawable/ic_add_person" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="203dp"
-        android:layout_height="200dp"
+        android:layout_width="409dp"
+        android:layout_height="213dp"
         android:background="#2C7E57C2"
         android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,8 +76,8 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:background="@drawable/round_bg"
             android:rotation="0"
             android:rotationX="0"
@@ -144,5 +145,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container"
         app:srcCompat="@drawable/ic_actions" />
+
+    <ImageButton
+        android:id="@+id/speakButton"
+        android:layout_width="69dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.47"
+        app:srcCompat="@drawable/ic_speech" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

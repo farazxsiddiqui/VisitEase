@@ -4,26 +4,47 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Map;
+
 public class EntriesActivity extends AppCompatActivity {
 
-    EditText nameText, destinationText, commentsText;
+    EditText destinationText, commentsText;
+    AutoCompleteTextView nameText;
     Button buttonUpdate,buttonDelete;
+
+    String[] names = new String[MainActivity.registered.size()];
+    boolean[] checkedItems = new boolean[MainActivity.registered.size()];
+    int i = 0;
+    {
+        for (Map.Entry<String, SimilarityClassifier.Recognition> entry : MainActivity.registered.entrySet()) {
+            //System.out.println("NAME"+entry.getKey());
+            names[i] = entry.getKey();
+            checkedItems[i] = false;
+            i = i + 1;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entries);
 
-        nameText = findViewById(R.id.nameText);
+        nameText = findViewById(R.id.autoNameI);
         destinationText = findViewById(R.id.destinationText);
         commentsText = findViewById(R.id.commentsText);
 
         buttonUpdate = findViewById(R.id.buttonUpdate);
         buttonDelete = findViewById(R.id.buttonDelete);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, names);
+        nameText.setAdapter(adapter);
 
         DatabaseHandler handler = new DatabaseHandler(EntriesActivity.this);
 
