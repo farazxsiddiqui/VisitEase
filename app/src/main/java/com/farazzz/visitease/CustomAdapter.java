@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     Context context;
     ArrayList name, destination, comments;
+
+    Animation translate;
 
 
     CustomAdapter(Context context
@@ -55,12 +60,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nameViewT, destinationViewT, commentsViewT;
+        LinearLayout mainLayout;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             nameViewT = itemView.findViewById(R.id.nameTextView);
             destinationViewT = itemView.findViewById(R.id.destinationTextView);
             commentsViewT = itemView.findViewById(R.id.commentsTextView);
+            mainLayout = itemView.findViewById(R.id.linearLayout);
+            //Animate recycler view
+            translate = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+            mainLayout.setAnimation(translate);
+
         }
     }
 }

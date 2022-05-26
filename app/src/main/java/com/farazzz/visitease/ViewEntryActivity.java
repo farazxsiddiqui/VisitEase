@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,7 @@ public class ViewEntryActivity extends AppCompatActivity {
     CustomAdapter customAdapter;
     ImageView emptyImage;
     TextView emptyText;
+    FloatingActionButton addButton;
 
 
 
@@ -33,6 +36,8 @@ public class ViewEntryActivity extends AppCompatActivity {
         emptyImage = findViewById(R.id.isEmptyImage);
         emptyText = findViewById(R.id.textView3);
 
+        addButton = findViewById(R.id.addFloatButton);
+
         name = new ArrayList<>();
         destination = new ArrayList<>();
         comments = new ArrayList<>();
@@ -43,6 +48,13 @@ public class ViewEntryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewEntryActivity.this));
 
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewEntryActivity.this,EntriesActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -64,4 +76,6 @@ public class ViewEntryActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
