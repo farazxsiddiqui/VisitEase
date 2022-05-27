@@ -1,7 +1,7 @@
 # VisitEase
 This an android application that helps you recognize visitors/members and keep a track of their activity.
 
-## Problem Statement
+## Problem Statement:
 ### Face Recognition
 Develop a browser-based application or a native mobile application to demonstrate application of Face Recognition technology.
 
@@ -16,8 +16,20 @@ You could choose to demonstrate application of Face Recognition in any area of a
 * Facilitate secure transactions
 You are free to choose any Face API you are comfortable with.
 
-## My Idea
+## My idea:
+I visit a gym on a regular basis and I find the security guards and the employees having a hard time recognizing
+the members, the staff gets transferred all the time from one branch of the gym to another. The gym members don't necessarily follow
+a particular routine and they visit the gym at different times throughout the week, the staff at evening shift have a hard time recognizing
+a member who usually visits the gym in the morning and vice-versa.
+The biometric solution is very complex and costly, so I decided to build an android application that helps with verifying the members
+and adding any additional details about them.
+I decided to make the application in such a way that it can run on low end android phones too and without the use of internet to further reduce the cost.
+I designed the UI in a very minimalistic way so that someone who's not very familiar with the technology can also use it effectively and we also know
+that a security guard might not be very familiar with using such applications.
 
+## What application of the Face Recognition technology am I demonstrating?
+### I'm demonstrating:
+* Preventing crime -> Biometric Verification using the person's Face.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine.
@@ -42,7 +54,7 @@ First enable these permissions manually from the app info in device settings if 
 * [SQLite](https://www.sqlite.org/docs.html) / [Watch Tutorial](https://www.youtube.com/playlist?list=PLSrm9z4zp4mGK0g_0_jxYGgg3os9tqRUQ)
 * [CameraX](https://developer.android.com/training/camerax) / [Watch Tutorial](https://www.youtube.com/watch?v=IrwhjDtpIU0&t=1s)
 
-## Model: 
+## Face Recognition Model: 
 MobileFaceNet:
 * [Research Paper](https://drive.google.com/file/d/1rrdEO7VSBviZQSjvADM74SjCz-m4r-6c/view?usp=sharing)
 * [Implementation](https://github.com/sirius-ai/MobileFaceNet_TF)
@@ -72,5 +84,16 @@ MobileFaceNet:
   add/modify/delete a particular visitor's activity details.
 * You also can click on "Modify Entries" option in the Actions menu to add/modify/delete a particular visitor's activity details.
 
+## Future scope of VisitEase:
+* I would like to continue working on the application and make it much better than it is today. 
+* I want to provide an easy biometric security solution to small businesses and firms who cannot afford a proper functioning biometric verification system.
+* More than 55% of Indians don't have access to the internet and I want to make this application be available to them without needing the internet to run it.
+* In India the crime rates are extremely high in some cities and through this application I am aspiring to change it.
+* We all know the importance of a woman's safety in today's world, if something like "VisitEase" is implemented on all private buildings/firms,
+  an imposter would never be able to access these private spaces and only an authorized person would be allowed.
+* All this could be done with a free application like "VisitEase". 
+* I wish to make an impact and bring a change in our society through this application.
+
 ## Application file:
 [VisitEase](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
+I'm also planning to deploy the application on Google Play Store so that everyone can access it.
