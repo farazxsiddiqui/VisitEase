@@ -59,8 +59,10 @@ MobileFaceNet:
 * [Research Paper](https://drive.google.com/file/d/1rrdEO7VSBviZQSjvADM74SjCz-m4r-6c/view?usp=sharing)
 * [Implementation](https://github.com/sirius-ai/MobileFaceNet_TF)
 
-## GitHub Resources:
-[Real-Time_Face_Recognition_Android](https://github.com/atharvakale31/Real-Time_Face_Recognition_Android) by [Atharva Kale](https://github.com/atharvakale31)
+## GitHub Resources:'
+* [CameraX-In-Java](https://github.com/Faisal-FS/CameraX-In-Java) by [Faisal-FS](https://github.com/Faisal-FS)
+* [Real-Time_Face_Recognition_Android](https://github.com/atharvakale31/Real-Time_Face_Recognition_Android) by [atharvakale31](https://github.com/atharvakale31)
+
 
 ## Features:
 * Add a new visitor by clicking on the "Add Visitor" button, you should see a preview of the face and an "Add Face" button to the right of it.
@@ -95,5 +97,4 @@ MobileFaceNet:
 * I wish to make an impact and bring a change in our society through this application.
 
 ## Application file:
-[VisitEase](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
-I'm also planning to deploy the application on Google Play Store so that everyone can access it.
+[VisitEase](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing) / I'm also planning to deploy the application on Google Play Store so that everyone can access it.
