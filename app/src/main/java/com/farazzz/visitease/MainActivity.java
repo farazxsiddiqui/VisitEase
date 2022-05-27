@@ -1095,14 +1095,14 @@ public class MainActivity extends AppCompatActivity {
 
         //During type conversion and save/load procedure,format changes(eg float converted to double).
         //So embeddings need to be extracted from it in required format(eg.double to float).
-        for (Map.Entry<String, SimilarityClassifier.Recognition> entry : retrievedMap.entrySet()) {
-            float[][] output = new float[1][OUTPUT_SIZE];
-            ArrayList arrayList = (ArrayList) entry.getValue().getExtra();
-            arrayList = (ArrayList) arrayList.get(0);
-            for (int counter = 0; counter < arrayList.size(); counter++) {
-                output[0][counter] = ((Double) arrayList.get(counter)).floatValue();
+        for (Map.Entry<String, SimilarityClassifier.Recognition> entry1 : retrievedMap.entrySet()) {
+            float[][] output1 = new float[1][OUTPUT_SIZE];
+            ArrayList arrayList1 = (ArrayList) entry1.getValue().getExtra();
+            arrayList1 = (ArrayList) arrayList1.get(0);
+            for (int counter = 0; counter < arrayList1.size(); counter++) {
+                output1[0][counter] = ((Double) arrayList1.get(counter)).floatValue();
             }
-            entry.getValue().setExtra(output);
+            entry1.getValue().setExtra(output1);
 
             //System.out.println("Entry output "+entry.getKey()+" "+entry.getValue().getExtra() );
 
