@@ -48,14 +48,14 @@ Clone this repository and import into **Android Studio**
 ```bash
 git clone https://github.com/farazxsiddiqui/VisitEase.git
 ```
-Alternatively, you can copy the HTTPS link of the repository [VisitEase](https://github.com/farazxsiddiqui/VisitEase.git)
+Alternatively, you can copy the HTTPS link of the repository [VisitEase](https://github.com/farazxsiddiqui/VisitEase.git).
 and then open your Android Studio and follow the below steps:
 * Go to File -> New -> Project from Version Control.
 * Paste the HTTPS link in the URL field.
 * Select the directory for your project.
-* Click on Clone
+* Click on Clone.
 * Wait for Android Studio to download the files and setup the application,
-  this can take upto 15 minutes, depending upon the internet speed and the system.
+  this can take upto 15 minutes, depending upon the internet speed and the system specifications.
 
 You can use USB debugging to run the application in your personal android device.
 
@@ -125,9 +125,9 @@ stay focused about what I'm about to do next.
 
 [View Methodology](https://docs.google.com/spreadsheets/d/11hfowxmczasHqWemiJFpEylM-E_tqiIZ/edit?usp=sharing&ouid=110171313933250898215&rtpof=true&sd=true)
 
-The project consisted of three main sprints:
+This project consisted of three main sprints:
 
-* Design
+* **Design**
 
 In this sprint I researched about the three problem statements and noted down the pros and cons of each if I decide to go with it
 and I found that the Face Recognition problem statement suits me the best.
@@ -136,7 +136,7 @@ Then I built a blueprint of my idea and how the application should look like.
 I then focused on the upcoming sprints and laid out a plan on how to proceed with the build sprint.
 
 
-* Build
+* **Build**
 
 I shared the blueprint of the application with my mentor and asked her for her suggestions and review.
 I used CI/CD method throughout the build sprint which helped me finding bugs and error instantly and I was also able to make sure
@@ -147,7 +147,7 @@ because of the CI/CD method.
 I also made a lot of UI improvements during this sprint.
 
 
-* Adapt
+* **Adapt**
 
 I discussed my progress with my mentor during this sprint, she also reviwed my application
 and suggested me on how to improve it.
@@ -233,10 +233,12 @@ Then I focused on the video demo and documentation part.
 * I wish to make an impact and bring a change in our society through this application.
 
 ## Application file:
-### [VisitEase](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
+### [VisitEase.apk](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
 
 ## Video demo:
-### [VisitEase](https://drive.google.com/file/d/1E3UHo_RHDjRv7-3JMbT75ApeRUuxJGGE/view?usp=sharing)
+### [VisitEase.MP4](https://drive.google.com/file/d/1E3UHo_RHDjRv7-3JMbT75ApeRUuxJGGE/view?usp=sharing)
+
+*It is advisable to use noise cancelling headphones while viewing the video and set the quality of the video to 1080p.*
 
 ## Contact:
-If you face any difficulty in running the application please contact me on my Email - ahmedfarazsiddiqui1@gmail.com.
+If you face any difficulty in running the application, feel free contact me on my Email - ahmedfarazsiddiqui1@gmail.com.
