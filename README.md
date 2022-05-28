@@ -82,13 +82,13 @@ First enable these permissions manually from the app info in device settings if 
 * [SQLite](https://www.sqlite.org/docs.html) / [Watch Tutorial](https://www.youtube.com/playlist?list=PLSrm9z4zp4mGK0g_0_jxYGgg3os9tqRUQ)
 * [CameraX](https://developer.android.com/training/camerax) / [Watch Tutorial](https://www.youtube.com/watch?v=IrwhjDtpIU0&t=1s)
 
-## What are the advantages and disadvantages of SQLite?
+## What are the advantages of SQLite?
 ### SQLite Advantages:
 * Reading and writing operations are very fast for SQLite database. It is almost 35% faster than File system.
 * It only loads the data which is needed, rather than reading the entire file and hold it in memory.
 * If you edit small parts, it only overwrite the parts of the file which was changed.
 
-## What are the advantages and disadvantages of CameraX?
+## What are the advantages of CameraX?
 ### CameraX Advantages:
 * Development speed was the main driver behind CameraX design. The SDK doesn’t just allow developers to get up and
   running much faster, it also has built in the best of development practices and photography know-how to get the most out of the camera.
@@ -97,7 +97,7 @@ First enable these permissions manually from the app info in device settings if 
   with backward-compatibility to Android 5.0 (API level 21).
 * Fast library releases is a flexibility that CameraX gets as a Jetpack support library.
 
-## What are the advantages and disadvantages of Tensorflow Lite?
+## What are the advantages of Tensorflow Lite?
 ### Tensorflow Lite Advantages:
 * Convert TensorFlow models to TensorFlow lite models quickly and easily for mobile-friendly models.
 * With simplicity, builds machine learning apps for iOS and Android devices.
