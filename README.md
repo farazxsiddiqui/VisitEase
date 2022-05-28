@@ -2,7 +2,7 @@
 ### This an android application that helps you recognize visitors/members and keep a track of their activity.
 This application was made for Microsoft Intern Engage 2022 program.
 
-(Note: Click on the links to view documentation/tutorials/etc. of that particular topic.)
+*Click on the links to view documentation/tutorials/etc. of that particular topic*
 
 ## Problem Statement:
 ### [Face Recognition](https://acehacker.com/microsoft/engage2022/index.html)
@@ -41,7 +41,7 @@ The things you need in working condition before cloning the repository.
 * Java JDK / [Watch Tutorial](https://www.youtube.com/watch?v=ClcHrcNXP9g)
 * [Android Studio](https://developer.android.com/studio/intro) / [Watch Tutorial](https://www.youtube.com/watch?v=5LMRbAiRkdY)
 
-Make sure you have the latest version of Android Studio installed.
+*Make sure you have the latest version of Android Studio installed.*
 
 ### Installation:
 Clone this repository and import into **Android Studio**
@@ -58,8 +58,11 @@ and then open your Android Studio and follow the below steps:
   this can take upto 15 minutes, depending upon the internet speed and the system.
 
 You can use USB debugging to run the application in your personal android device.
+
+*It is recommended to use an Android 11 device for running the application.*
+
 Here are the steps to do so:
-* In your personal android device, go to Setting -> About phone -> Build number.
+* In your personal android device, go to Settings -> About phone -> Build number.
 * Click on Build number 7 times to fo into developer mode.
 * Connect your android device with your system using an USB cable.
 * Make sure data transfer through USB option is enabled in your android device.
@@ -79,8 +82,32 @@ First enable these permissions manually from the app info in device settings if 
 * [SQLite](https://www.sqlite.org/docs.html) / [Watch Tutorial](https://www.youtube.com/playlist?list=PLSrm9z4zp4mGK0g_0_jxYGgg3os9tqRUQ)
 * [CameraX](https://developer.android.com/training/camerax) / [Watch Tutorial](https://www.youtube.com/watch?v=IrwhjDtpIU0&t=1s)
 
+## What are the advantages and disadvantages of SQLite?
+### SQLite Advantages:
+* Reading and writing operations are very fast for SQLite database. It is almost 35% faster than File system.
+* It only loads the data which is needed, rather than reading the entire file and hold it in memory.
+* If you edit small parts, it only overwrite the parts of the file which was changed.
+
+## What are the advantages and disadvantages of CameraX?
+### CameraX Advantages:
+* Development speed was the main driver behind CameraX design. The SDK doesn’t just allow developers to get up and
+  running much faster, it also has built in the best of development practices and photography know-how to get the most out of the camera.
+* Android-enabled devices come in large numbers with many variations. CameraX aims to be consistent across many Android devices
+  and has taken that complexity upon itself, to offer developers an SDK that works consistently across 150+ phone models,
+  with backward-compatibility to Android 5.0 (API level 21).
+* Fast library releases is a flexibility that CameraX gets as a Jetpack support library.
+
+## What are the advantages and disadvantages of Tensorflow Lite?
+### Tensorflow Lite Advantages:
+* Convert TensorFlow models to TensorFlow lite models quickly and easily for mobile-friendly models.
+* With simplicity, builds machine learning apps for iOS and Android devices.
+* In contrast to server-based architectures, a more effective alternative to mobile model enablement.
+  On mobile devices, it allows offline inference.
+* Tensorflow Lite allows one to execute machine learning models easily on a smartphone, allowing one to perform traditional machine learning tasks without
+  the need for an external API or server. As a result, the models will operate on devices that are not connected to the internet.
+
 ## Face Recognition Model: 
-MobileFaceNet:
+### MobileFaceNet:
 * [Research Paper](https://drive.google.com/file/d/1rrdEO7VSBviZQSjvADM74SjCz-m4r-6c/view?usp=sharing)
 * [Implementation](https://github.com/sirius-ai/MobileFaceNet_TF)
 
@@ -91,7 +118,7 @@ MobileFaceNet:
 * [flowers-tensorflow-android](https://github.com/vikyale/flowers-tensorflow-android) by [vikyale](https://github.com/vikyale)
 
 ## Development:
-Agile's Scrum Methodology:
+### Agile's Scrum Methodology:
 I have implemented Agile's scrum methodology throughout the project development, scrum is a frame used in product development which
 is based on incremental processes, so each iteration consists of sprints and focuses on small increments of work, this helped me
 stay focused about what I'm about to do next.
@@ -152,7 +179,7 @@ Then I focused on the video demo and documentation part.
 * After clicking on **View Entries** you would be redirected to a new activity where you can see the details of all visitors.
 * You can also go to the **Modify Entries** activity using the **Add Entry** button near the bottom-right corner of the **View Entries** activity.
 * You can see the list of visitors in the **View Visitors List** in the **Actions Menu** to see the list of visitors.
-* You can click on any name in the *View Visitors List* dialog box and you would be redirected to a new activity where you can select the
+* You can click on any name in the **View Visitors List** dialog box and you would be redirected to a new activity where you can select the
   name of a visitor and get the details of that particular visitor only.
 
 ## Screenshots
@@ -212,4 +239,4 @@ Then I focused on the video demo and documentation part.
 ### [VisitEase](https://drive.google.com/file/d/1E3UHo_RHDjRv7-3JMbT75ApeRUuxJGGE/view?usp=sharing)
 
 ## Contact:
-If you face any difficulty in running the application please contact me on my [Email](ahmedfarazsiddiqui1@gmail.com).
+If you face any difficulty in running the application please contact me on my Email - ahmedfarazsiddiqui1@gmail.com.
