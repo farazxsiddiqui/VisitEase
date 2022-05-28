@@ -2,7 +2,7 @@
 ### This an android application that helps you recognize visitors/members and keep a track of their activity.
 This application was made for Microsoft Intern Engage 2022 program.
 
-*Click on the links to view documentation/tutorials/etc. of that particular topic*
+*Click on the links to view documentation/tutorials/etc. of that particular topic/technology.*
 
 ## Problem Statement:
 ### [Face Recognition](https://acehacker.com/microsoft/engage2022/index.html)
@@ -48,7 +48,7 @@ Clone this repository and import into **Android Studio**
 ```bash
 git clone https://github.com/farazxsiddiqui/VisitEase.git
 ```
-Alternatively, you can copy the HTTPS link of the repository [VisitEase](https://github.com/farazxsiddiqui/VisitEase.git).
+Alternatively, you can copy the HTTPS link of the repository [VisitEase](https://github.com/farazxsiddiqui/VisitEase.git)
 and then open your Android Studio and follow the below steps:
 * Go to File -> New -> Project from Version Control.
 * Paste the HTTPS link in the URL field.
@@ -57,13 +57,13 @@ and then open your Android Studio and follow the below steps:
 * Wait for Android Studio to download the files and setup the application,
   this can take upto 15 minutes, depending upon the internet speed and the system specifications.
 
-You can use USB debugging to run the application in your personal android device.
+You can use USB debugging to run the application on your personal android device.
 
 *It is recommended to use an Android 11 device for running the application.*
 
 Here are the steps to do so:
 * In your personal android device, go to Settings -> About phone -> Build number.
-* Click on Build number 7 times to fo into developer mode.
+* Click on Build number 7 times to enter into developer mode.
 * Connect your android device with your system using an USB cable.
 * Make sure data transfer through USB option is enabled in your android device.
 * Now go to Settings -> System -> Advanced -> Developer options -> USB debugging.
@@ -81,14 +81,15 @@ First enable these permissions manually from the app info in device settings if 
 * [Tensorflow Lite](https://www.tensorflow.org/lite/android) / [Watch Tutorial](https://www.youtube.com/watch?v=s_XOVkjXQbU&t=874s)
 * [SQLite](https://www.sqlite.org/docs.html) / [Watch Tutorial](https://www.youtube.com/playlist?list=PLSrm9z4zp4mGK0g_0_jxYGgg3os9tqRUQ)
 * [CameraX](https://developer.android.com/training/camerax) / [Watch Tutorial](https://www.youtube.com/watch?v=IrwhjDtpIU0&t=1s)
+* [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction) / [Watch Tutorial](https://www.youtube.com/watch?v=fis26HvvDII)
 
-## What are the advantages of SQLite?
+
+## Let's see why I decided to use these tech stacks/libraries/APIs/Models:
 ### SQLite Advantages:
 * Reading and writing operations are very fast for SQLite database. It is almost 35% faster than File system.
 * It only loads the data which is needed, rather than reading the entire file and hold it in memory.
 * If you edit small parts, it only overwrite the parts of the file which was changed.
 
-## What are the advantages of CameraX?
 ### CameraX Advantages:
 * Development speed was the main driver behind CameraX design. The SDK doesn’t just allow developers to get up and
   running much faster, it also has built in the best of development practices and photography know-how to get the most out of the camera.
@@ -97,7 +98,6 @@ First enable these permissions manually from the app info in device settings if 
   with backward-compatibility to Android 5.0 (API level 21).
 * Fast library releases is a flexibility that CameraX gets as a Jetpack support library.
 
-## What are the advantages of Tensorflow Lite?
 ### Tensorflow Lite Advantages:
 * Convert TensorFlow models to TensorFlow lite models quickly and easily for mobile-friendly models.
 * With simplicity, builds machine learning apps for iOS and Android devices.
@@ -119,11 +119,11 @@ First enable these permissions manually from the app info in device settings if 
 
 ## Development:
 ### Agile's Scrum Methodology:
-I have implemented Agile's scrum methodology throughout the project development, scrum is a frame used in product development which
+I have implemented Agile's Scrum Methodology throughout the project's development, scrum is a frame used in product development which
 is based on incremental processes, so each iteration consists of sprints and focuses on small increments of work, this helped me
-stay focused about what I'm about to do next.
+stay focused and informed about what I'm about to do next.
 
-[View Methodology](https://docs.google.com/spreadsheets/d/11hfowxmczasHqWemiJFpEylM-E_tqiIZ/edit?usp=sharing&ouid=110171313933250898215&rtpof=true&sd=true)
+[View Scrum Methodology](https://docs.google.com/spreadsheets/d/11hfowxmczasHqWemiJFpEylM-E_tqiIZ/edit?usp=sharing&ouid=110171313933250898215&rtpof=true&sd=true)
 
 This project consisted of three main sprints:
 
@@ -161,9 +161,9 @@ Then I focused on the video demo and documentation part.
 
 ## Features:
 * Add a new visitor by clicking on the **Add Visitor** button, you should see a preview of the face and an **Add Face** button to the right of it.
-* Click on the **Add Face** and then enter the name of the visitor to store his/her data.
-* Click on the **Options** button near bottom-right corner to see a list of available actions.
-* Click on **Save Data** to save the face data of the visitor so that it gets stored in the local storage of your device.
+* Click on **Add Face** and then enter the name of the visitor to store his/her data.
+* Click on **Options** button near bottom-right corner to see a list of available actions.
+* Click on **Save Data** in the **Options** menu to save the face data of the visitor so that it gets stored in the local storage of your device.
 * Alternatively you can click on **Import Photo** in the **Actions Menu** to import a photo directly from the local storage of your device,
   but make sure that the photo is somewhat similar to a passport photo.
 * Now click on **Recognize** button and point the camera at the visitor and the name of the visitor should pop up, you can also flip the camera
@@ -173,16 +173,16 @@ Then I focused on the video demo and documentation part.
   it would speak **Unknown** and if you have not held the device properly and it is unable to detect the face it would speak **No Face Detected!**.
 * You can click on **Update Visitors List** in the **Actions Menu** to delete a particular visitor's face data, you can select multiple visitors too.
   Deleting a visitor's face data also deletes his activity details.
-* You can click on **Clear Data** option in the **Actions Menu** to delete the face data and the details of all visitors.
+* You can click on **Clear Data** in the **Actions Menu** to delete the face data and the details of all visitors.
 * You also can click on **Modify Entries** option in the **Actions Menu** to add/modify/delete a particular visitor's activity details.
-* You can click on **View Entries** option in the **Actions Menu** to view the details of all visitors in the order of their arrival.
+* You can click on **View Entries** in the **Actions Menu** to view the details of all visitors in the order of their arrival.
 * After clicking on **View Entries** you would be redirected to a new activity where you can see the details of all visitors.
 * You can also go to the **Modify Entries** activity using the **Add Entry** button near the bottom-right corner of the **View Entries** activity.
 * You can see the list of visitors in the **View Visitors List** in the **Actions Menu** to see the list of visitors.
 * You can click on any name in the **View Visitors List** dialog box and you would be redirected to a new activity where you can select the
   name of a visitor and get the details of that particular visitor only.
 
-## Screenshots
+## Screenshots:
 
 <table>
   <tr>
@@ -213,7 +213,7 @@ Then I focused on the video demo and documentation part.
 <table>
   <tr>
     <td><b>7) View Entries</b></td>
-     <td><b>8) Update/Delete Entries</b></td>
+     <td><b>8) Modify Entries</b></td>
      <td><b>9) View Individual Details</b></td>
   </tr>
   <tr>
@@ -232,13 +232,12 @@ Then I focused on the video demo and documentation part.
 * All this could be done with a free application like "VisitEase". 
 * I wish to make an impact and bring a change in our society through this application.
 
-## Application file:
-### [VisitEase.apk](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
+## Application File:
+### [VisitEase.APK](https://drive.google.com/file/d/1YP06oNYp7tlw03Rdli-qqDtU0eQ96C3H/view?usp=sharing)
 
 ## Video demo:
 ### [VisitEase.MP4](https://drive.google.com/file/d/1E3UHo_RHDjRv7-3JMbT75ApeRUuxJGGE/view?usp=sharing)
 
 *It is advisable to use noise cancelling headphones while viewing the video and set the quality of the video to 1080p.*
 
-## Contact:
-If you face any difficulty in running the application, feel free contact me on my Email - ahmedfarazsiddiqui1@gmail.com.
+#Thank you for reading!
