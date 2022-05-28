@@ -2,7 +2,7 @@
 ### This an android application that helps you recognize visitors/members and keep a track of their activity.
 This application was made for Microsoft Intern Engage 2022 program.
 
-(Note: Click on the links to view documentation/tutorials/etc. of that particulat topic)
+(Note: Click on the links to view documentation/tutorials/etc. of that particular topic.)
 
 ## Problem Statement:
 ### [Face Recognition](https://acehacker.com/microsoft/engage2022/index.html)
@@ -31,8 +31,7 @@ I designed the UI in a very minimalistic way so that someone who's not very fami
 that a security guard might not be very familiar with using such applications.
 
 ## What application of the Face Recognition technology am I demonstrating?
-### I'm demonstrating:
-* Preventing crime -> Biometric Verification using the person's face.
+### I'm demonstrating: Preventing crime -> Biometric Verification using the person's face.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine.
@@ -64,14 +63,18 @@ MobileFaceNet:
 * [Implementation](https://github.com/sirius-ai/MobileFaceNet_TF)
 
 ## GitHub Resources:
+* [MobileFaceNet_TF](https://github.com/sirius-ai/MobileFaceNet_TF) by [sirius-ai](https://github.com/sirius-ai)
 * [CameraX-In-Java](https://github.com/Faisal-FS/CameraX-In-Java) by [Faisal-FS](https://github.com/Faisal-FS)
 * [Real-Time_Face_Recognition_Android](https://github.com/atharvakale31/Real-Time_Face_Recognition_Android) by [atharvakale31](https://github.com/atharvakale31)
+* [flowers-tensorflow-android](https://github.com/vikyale/flowers-tensorflow-android) by [vikyale](https://github.com/vikyale)
 
 ## Development:
-[Agile's Scrum Methodology](https://docs.google.com/spreadsheets/d/11hfowxmczasHqWemiJFpEylM-E_tqiIZ/edit?usp=sharing&ouid=110171313933250898215&rtpof=true&sd=true):
+Agile's Scrum Methodology:
 I have implemented Agile's scrum methodology throughout the project development, scrum is a frame used in product development which
 is based on incremental processes, so each iteration consists of sprints and focuses on small increments of work, this helped me
 stay focused about what I'm about to do next.
+
+[View Methodology](https://docs.google.com/spreadsheets/d/11hfowxmczasHqWemiJFpEylM-E_tqiIZ/edit?usp=sharing&ouid=110171313933250898215&rtpof=true&sd=true)
 
 The project consisted of three main sprints:
 
@@ -133,26 +136,24 @@ Then I focused on the video demo and documentation part.
 
 <table>
   <tr>
-    <td><b>1.Layout</b></td>
-     <td><b>2.Add Visitor</b></td>
-     <td><b>3.Recognize Visitor</b></td>
+    <td><b>1) Layout</b></td>
+     <td><b>2) Add Visitor</b></td>
+     <td><b>3) Recognize Visitor</b></td>
      
   </tr>
   <tr>
-    <td><img src="demo/Layout.png" width=270 height=500></td>
-  <td><img src="demo/Add Visitor.png" width=270 height=500></td>
-    <td><img src="demo/Recognize.png" width=270 height=500></td>
+    <td><img src="demo/Layout.png" width=225 height=500></td>
+  <td><img src="demo/Add Visitor.png" width=225 height=500></td>
+    <td><img src="demo/Recognize.png" width=225 height=500></td>
   
   </tr>
  </table>
  
-
- 
  <table>
   <tr>
-    <td><b>Actions Menu</b></td>
-     <td><b>View Visitors List</b></td>
-     <td><b>Update Visitors List</b></td>
+    <td><b>4) Actions Menu</b></td>
+     <td><b>5) View Visitors List</b></td>
+     <td><b>6) Update Visitors List</b></td>
   </tr>
   <tr>
     <td><img src="demo/Actions Menu.png" width=225 height=500></td>
@@ -163,9 +164,9 @@ Then I focused on the video demo and documentation part.
 
 <table>
   <tr>
-    <td><b>View Entries</b></td>
-     <td><b>Update/Delete Entries</b></td>
-     <td><b>View particular Visitor's details</b></td>
+    <td><b>7) View Entries</b></td>
+     <td><b>8) Update/Delete Entries</b></td>
+     <td><b>9) View particular Visitor's details</b></td>
   </tr>
   <tr>
     <td><img src="demo/View Entries.png" width=225 height=500></td>
