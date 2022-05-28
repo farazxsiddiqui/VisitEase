@@ -1,6 +1,7 @@
 # VisitEase
-###This an android application that helps you recognize visitors/members and keep a track of their activity.
+### This an android application that helps you recognize visitors/members and keep a track of their activity.
 This application was made for Microsoft Intern Engage 2022 program.
+
 (Note: Click on the links to view documentation/tutorials/etc. of that particulat topic)
 
 ## Problem Statement:
@@ -127,6 +128,51 @@ Then I focused on the video demo and documentation part.
   and you would find an "Add Detail" button near the botton-right corner, you can click on that to 
   add/modify/delete a particular visitor's activity details.
 * You also can click on "Modify Entries" option in the Actions menu to add/modify/delete a particular visitor's activity details.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><b>1.Layout</b></td>
+     <td><b>2.Add Visitor</b></td>
+     <td><b>3.Recognize Visitor</b></td>
+     
+  </tr>
+  <tr>
+    <td><img src="demo/Layout.png" width=270 height=500></td>
+  <td><img src="demo/Add Visitor.png" width=270 height=500></td>
+    <td><img src="demo/Recognize.png" width=270 height=500></td>
+  
+  </tr>
+ </table>
+ 
+
+ 
+ <table>
+  <tr>
+    <td><b>Actions Menu</b></td>
+     <td><b>View Visitors List</b></td>
+     <td><b>Update Visitors List</b></td>
+  </tr>
+  <tr>
+    <td><img src="demo/Actions Menu.png" width=225 height=500></td>
+    <td><img src="demo/View Visitors.png" width=225 height=500></td>
+    <td><img src="demo/Remove Visitors.png" width=225 height=500></td>
+  </tr>
+ </table>
+
+<table>
+  <tr>
+    <td><b>View Entries</b></td>
+     <td><b>Update/Delete Entries</b></td>
+     <td><b>View particular Visitor's details</b></td>
+  </tr>
+  <tr>
+    <td><img src="demo/View Entries.png" width=225 height=500></td>
+    <td><img src="demo/Modify Entries.png" width=225 height=500></td>
+    <td><img src="demo/View Individual.png" width=225 height=500></td>
+  </tr>
+ </table>
 
 ## Future scope of VisitEase:
 * I would like to continue working on the application and make it much better than it is today. 
