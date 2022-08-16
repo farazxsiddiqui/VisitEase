@@ -240,4 +240,4 @@ Then I focused on the video demo and documentation part.
 
 *It is advisable to use noise cancelling headphones while viewing the video and set the quality of the video to 1080p.*
 
-#Thank you for reading!
+# Thank you for reading!
